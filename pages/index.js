@@ -1,6 +1,29 @@
 import Head from 'next/head';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
+  // State to hold the names fetched from the JSON file
+  const [names, setNames] = useState([]);
+
+  // Fetch names from the JSON file on Google Drive when the component mounts
+  useEffect(() => {
+    async function fetchNames() {
+      try {
+        const response = await fetch('/api/names');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setNames(data.names);
+      } catch (error) {
+        console.error('Error fetching names:', error);
+      }
+    }
+  
+    fetchNames();
+  }, []);
+  
+
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
       <Head>
@@ -22,9 +45,9 @@ export default function Home() {
           <h2 className="text-lg md:text-2xl font-bold mb-4">Select Your Name:</h2>
           <div className="mb-4">
             <select className="form-select block w-full mt-1 border-gray-300 shadow-sm rounded-md">
-              <option>John Doe</option>
-              <option>Jane Doe</option>
-              <option>Alex Smith</option>
+              {names.map((name, index) => (
+                <option key={index}>{name}</option>
+              ))}
             </select>
           </div>
           <button className="transition-all w-full bg-[#0c2643] hover:bg-[#275182] text-white font-bold py-2 px-4 rounded">

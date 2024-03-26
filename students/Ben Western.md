@@ -1,0 +1,82 @@
+---
+Current: Potential
+---
+```button
+name Insert student details
+type line(100) template
+action Student details template
+```
+> [!Abstract]+ Session history
+> ## Absences
+> ```dataview
+> table Subject, Absence_date AS Date, Absence_reason AS Reason
+> from "1.4 Admin logs/Absences - planned" OR "1.4 Admin logs/Absences - unexplained"
+> where icontains(file.name,"Ben Western")
+> ```
+> 
+> ## Meetings
+> ```dataview
+> table Meeting_type AS "Meeting type", Meeting_date AS Date, Meeting_time as Time
+> from "1.4 Admin logs/Meetings" 
+> where icontains(file.name,"Ben Western")
+> ```
+> 
+> ## English drafting sessions
+> ```dataview
+> table Date_of_session AS Date, Time_of_session AS Time
+> from "1.4 Admin logs/English drafting sessions"
+> where icontains(file.name,"Ben Western")
+> ```
+> 
+> ## Permanent class changes
+> ```dataview
+> table Subject, Old_class_date AS "Old class date", New_class_date AS "New class date", New_class_time as "New class time"
+> from "1.4 Admin logs/Permanent class changes"
+> where icontains(file.name,"Ben Western")
+> ```
+
+
+## Trial session questions to ask
+### 1. How did you hear about us?
+- friends; noah ghan  - pembroke
+
+### 2. **Student details** - year level, school, subjects
+- Year level: 12
+- Subjects: Spec, chem, physics
+- 
+### 3. **Motivation** - why do you want tutoring?
+- to do betgter academically
+### 4.  What do you want to do after you leave school?
+- not really
+### 5. **Subjects** - which subjects would you get tutoring for if you came to Altitutor?
+- as above
+### 6. **Grades** - what grades are you currently on for each of these subjects?
+- As and Bs in most subjects 
+### 7.  **Topic** - which topic are you up to for each of these subjects? Which topic(s) have you completed already?
+- doesn't know 
+
+> [!Info]- Trial session guide
+![[1.2.1 Trial sessions#General format]]
+
+```button
+name Insert subsidy interview
+type append template
+action Subsidy questions template
+```
+
+
+# Messages
+```button
+name Generate student message
+type append template
+action MESSAGE - new student message
+```
+
+
+
+```button
+name Generate parent message
+type append template
+action MESSAGE - new parent message
+```
+
